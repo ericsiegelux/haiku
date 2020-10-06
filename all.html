@@ -8,27 +8,24 @@
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
       <script src="https://spreadsheets.google.com/feeds/cells/1Asx6pUR-b2g5zNzPLRa1JX0YfbILB5bCse0L8nIP15U/1/public/values?alt=json-in-script&callback=doData"></script>
-      
       <title>Riq's Haikus</title>
       <style type="text/css">
          body { background: #F4F9F6 !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
       </style>
       <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
       <script>
-
-        
          var haikuJSON = "https://spreadsheets.google.com/feeds/cells/1Asx6pUR-b2g5zNzPLRa1JX0YfbILB5bCse0L8nIP15U/1/public/full?alt=json";
          $.getJSON(haikuJSON, function( data ) {
                var items = [];
                var sheet_rows = data.feed.entry.length/3;
-
+         
                makeDesktopTable(data, sheet_rows);
                makeMobileTable(data, sheet_rows);
          
          
          })
-
-
+         
+         
          function makeDesktopTable(data, sheet_rows) {
             
             var ELTable  = document.createElement("table");
@@ -37,9 +34,9 @@
             const Width  = 3;
             var rows = parseInt(Height, 10);
             var cols = parseInt(Width, 10); 
-
+         
             ELTable.innerHTML = ""; // Empty table before inserting new stuff
-
+         
             var tbody = document.createElement("tbody");
             
             haiku_iterator = data.feed.entry.length-1;
@@ -48,29 +45,29 @@
               var R = document.createElement("tr");    // Make row.
               for (var j = 0; j < cols; j++) {         // N cells...
                 var haiku = document.createElement("td");
-
+         
                   haiku.innerText = data.feed.entry[haiku_iterator-2].gs$cell.inputValue + "\n"+
                   data.feed.entry[haiku_iterator-1].gs$cell.inputValue + "\n"+ data.feed.entry[haiku_iterator].gs$cell.inputValue; // Make cell.
-
-
+         
+         
                   haiku_iterator = haiku_iterator-3;
-
+         
                   if (haiku_iterator === -1) { break; }
-
+         
                   R.appendChild(haiku);                      // Insert cell into row.
               }
               if (haiku_iterator === -1) { break; }
               tbody.appendChild(R);                    // Insert row into tbody
             }
-  
-
+         
+         
             table_holder = document.getElementsByClassName("table-lg");
             table_holder = table_holder[0];
-
+         
             ELTable.appendChild(tbody);    
             table_holder.appendChild(ELTable);            // Insert tbody into table
           }
-
+         
           function makeMobileTable(data, sheet_rows) {
             
             var ELTable  = document.createElement("table");
@@ -79,9 +76,9 @@
             const Width  = 2;
             var rows = parseInt(Height, 10);
             var cols = parseInt(Width, 10); 
-
+         
             ELTable.innerHTML = ""; // Empty table before inserting new stuff
-
+         
             var tbody = document.createElement("tbody");
             
             haiku_iterator = data.feed.entry.length-1;
@@ -90,26 +87,26 @@
               var R = document.createElement("tr");    // Make row.
               for (var j = 0; j < cols; j++) {         // N cells...
                 var haiku = document.createElement("td");
-
+         
                   haiku.innerText = data.feed.entry[haiku_iterator-2].gs$cell.inputValue + "\n"+
                   data.feed.entry[haiku_iterator-1].gs$cell.inputValue + "\n"+ data.feed.entry[haiku_iterator].gs$cell.inputValue; // Make cell.
-
-
+         
+         
                   haiku_iterator = haiku_iterator-3;
-
+         
                   if (haiku_iterator === -1) { break; }
-
-
+         
+         
                   R.appendChild(haiku);                      // Insert cell into row.
               }
               if (haiku_iterator === -1) { break; }
               tbody.appendChild(R);                    // Insert row into tbody
             }
-  
-
+         
+         
             table_holder = document.getElementsByClassName("table-lg");
             table_holder = table_holder[0];
-
+         
             ELTable.appendChild(tbody);    
             table_holder.appendChild(ELTable);            // Insert tbody into table
           }
@@ -118,37 +115,34 @@
       </script>
    </head>
    <body>
-
-         <input type="text" id="myInput"  placeholder="Search for a haiku phrase">
-
-         <div class="table-lg"></div>
-
-      
-         <script>
-
+      <button id="back" onclick="location.href='index.html'" ></button>
+      <input type="text" id="myInput"  placeholder="Search for a haiku phrase">
+      <div class="table-lg"></div>
+      <script>
          $(document).ready(function(){
             $("#myInput").on("keyup", function() {
               var value = $(this).val().toLowerCase();
               $(".table tr td").filter(function() {
-
-                original_value = value;
-
-                value = value.replace(/\s/g, '');
-
-                $(this).toggle($(this).text().toLowerCase().replace(/\s/g, '').indexOf(value) > -1);
-
+         
+                //original_value = value;
+         
+                // value = value.replace(/\s/g, '');
+              
+                // $(this).toggle($(this).text().toLowerCase().replace(/\s/g, '').indexOf(value) > -1);
+         
+                $(this).toggle($(this).html().replace(/<br\s*\/?>/gi,' ').toLowerCase().indexOf(value) > -1);
+         
                 // $(this).wrapInner(function() {
                 //   return "<span style="background-color:yellow;"" + $(this).text().toLowerCase().replace(/\s/g, '').indexOf(value) + "'></span>";
                 // });
-
+         
                 
-
+         
               });
             });
           });
-
+         
       </script>
-
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

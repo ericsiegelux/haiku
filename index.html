@@ -8,14 +8,12 @@
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
       <script src="https://spreadsheets.google.com/feeds/cells/1Asx6pUR-b2g5zNzPLRa1JX0YfbILB5bCse0L8nIP15U/1/public/values?alt=json-in-script&callback=doData"></script>
- 
       <title>Riq's Haikus</title>
       <style type="text/css">
          body { background: #F4F9F6 !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
       </style>
       <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
       <script>
-
          var haiku_index = null;
          var haikuJSON = "https://spreadsheets.google.com/feeds/cells/1Asx6pUR-b2g5zNzPLRa1JX0YfbILB5bCse0L8nIP15U/1/public/full?alt=json";
          $.getJSON(haikuJSON, function( data ) {
@@ -26,7 +24,7 @@
                document.getElementById("line1").innerHTML = data.feed.entry[haiku_index].gs$cell.inputValue;
                document.getElementById("line2").innerHTML = data.feed.entry[haiku_index+1].gs$cell.inputValue;
                document.getElementById("line3").innerHTML = data.feed.entry[haiku_index+2].gs$cell.inputValue;
-
+         
                // makeDesktopTable(data, sheet_rows);
                makeMobileTable(data, sheet_rows)
          
@@ -34,7 +32,7 @@
          })
          
          sessionStorage.setItem('hi', haiku_index);
-
+         
          function makeDesktopTable(data, sheet_rows) {
             
             var ELTable  = document.createElement("table");
@@ -43,9 +41,9 @@
             const Width  = 3;
             var rows = parseInt(Height, 10);
             var cols = parseInt(Width, 10); 
-
+         
             ELTable.innerHTML = ""; // Empty table before inserting new stuff
-
+         
             var tbody = document.createElement("tbody");
             
             haiku_iterator = data.feed.entry.length-1;
@@ -54,36 +52,36 @@
               var R = document.createElement("tr");    // Make row.
               for (var j = 0; j < cols; j++) {         // N cells...
                 var haiku = document.createElement("td");
-
+         
                   haiku.innerText = data.feed.entry[haiku_iterator-2].gs$cell.inputValue + "\n"+
                   data.feed.entry[haiku_iterator-1].gs$cell.inputValue + "\n"+ data.feed.entry[haiku_iterator].gs$cell.inputValue; // Make cell.
-
-
+         
+         
                   console.log("Before Subtraction:" + haiku_iterator);
-
+         
                   console.log(data.feed.entry[haiku_iterator-2].gs$cell.inputValue + "\n"+
                   data.feed.entry[haiku_iterator-1].gs$cell.inputValue + "\n"+ data.feed.entry[haiku_iterator].gs$cell.inputValue );
-
+         
                   haiku_iterator = haiku_iterator-3;
-
+         
                   if (haiku_iterator === -1) { break; }
-
+         
                   console.log("After Subtraction:" + haiku_iterator);
-
+         
                   R.appendChild(haiku);                      // Insert cell into row.
               }
               if (haiku_iterator === -1) { break; }
               tbody.appendChild(R);                    // Insert row into tbody
             }
-  
-
+         
+         
             table_holder = document.getElementsByClassName("table-lg");
             table_holder = table_holder[0];
-
+         
             ELTable.appendChild(tbody);    
             table_holder.appendChild(ELTable);            // Insert tbody into table
           }
-
+         
           function makeMobileTable(data, sheet_rows) {
             
             var ELTable  = document.createElement("table");
@@ -92,9 +90,9 @@
             const Width  = 2;
             var rows = parseInt(Height, 10);
             var cols = parseInt(Width, 10); 
-
+         
             ELTable.innerHTML = ""; // Empty table before inserting new stuff
-
+         
             var tbody = document.createElement("tbody");
             
             haiku_iterator = data.feed.entry.length-1;
@@ -103,32 +101,26 @@
               var R = document.createElement("tr");    // Make row.
               for (var j = 0; j < cols; j++) {         // N cells...
                 var haiku = document.createElement("td");
-
+         
                   haiku.innerText = data.feed.entry[haiku_iterator-2].gs$cell.inputValue + "\n"+
                   data.feed.entry[haiku_iterator-1].gs$cell.inputValue + "\n"+ data.feed.entry[haiku_iterator].gs$cell.inputValue; // Make cell.
-
-
-                  console.log("Before Subtraction:" + haiku_iterator);
-
-                  console.log(data.feed.entry[haiku_iterator-2].gs$cell.inputValue + "\n"+
-                  data.feed.entry[haiku_iterator-1].gs$cell.inputValue + "\n"+ data.feed.entry[haiku_iterator].gs$cell.inputValue );
-
+         
                   haiku_iterator = haiku_iterator-3;
-
+         
                   if (haiku_iterator === -1) { break; }
-
-                  console.log("After Subtraction:" + haiku_iterator);
-
+         
+         
+         
                   R.appendChild(haiku);                      // Insert cell into row.
               }
               if (haiku_iterator === -1) { break; }
               tbody.appendChild(R);                    // Insert row into tbody
             }
-  
-
+         
+         
             table_holder = doacument.getElementsByClassName("table-lg");
             table_holder = table_holder[0];
-
+         
             ELTable.appendChild(tbody);    
             table_holder.appendChild(ELTable);            // Insert tbody into table
           }
@@ -137,10 +129,9 @@
       </script>
    </head>
    <body>
-
       <div class="container ku-contain d-flex justify-content-center text-center">
          <div id="theku">
-          <span><a href="all.html"> See All</a></span>
+            <span><a href="all.html"> See All</a></span>
             <button id="copy" ></button>
             <p id="kuLines">
                <span id="line1"></span> <br> 
@@ -151,12 +142,7 @@
          <button href="#" class="newhaiku">New Haiku</button>
          <div class="table-lg"></div>
       </div>
-      
       <script>
-
-
-
-
          $( ".newhaiku" ).click(function() {
           var haikuJSON = "https://spreadsheets.google.com/feeds/cells/1Asx6pUR-b2g5zNzPLRa1JX0YfbILB5bCse0L8nIP15U/1/public/full?alt=json";
           $.getJSON(haikuJSON, function( data ) {
@@ -179,7 +165,7 @@
          
           })
          })
-        
+         
          
               // all3 = line1+" \n"+line2+" \n"+line3;
               all3 = line1+line2+line3;
@@ -220,11 +206,19 @@
               popup.remove();
             },3000)
             
-         
          }
          
+         var executed = false;
+         
          $( "#copy" ).click(function() {
-          copyToClipboard();
+         
+              if(executed == false){
+         
+                executed = true;
+                setTimeout(function(){executed = false}, 3000);
+                copyToClipboard();
+         
+              }
           })
          
          

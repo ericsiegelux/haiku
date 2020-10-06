@@ -15,25 +15,25 @@ body {
   align-items: center;
 }
 
-.ku-contain span a{
+.ku-contain span a {
   top: -50px;
   left: 0%;
   position: absolute;
   font-size: 20px;
 }
 
-.ku-contain a:hover{
-  color:#155780;
+.ku-contain a:hover {
+  color: #1a4059;
   text-decoration: none;
   cursor: pointer;
 }
 
-.ku-contain a:visited{
-  color: #1a4059;
+.ku-contain a:visited {
+  color: #155780;
 }
 
-.ku-contain span{
-  right:100%;
+.ku-contain span {
+  right: 100%;
 }
 
 #theku {
@@ -67,6 +67,29 @@ body {
 
 #copy:hover {
   cursor: pointer;
+}
+
+#back {
+  background: url(arrow_back-24px.svg);
+  height: 25px;
+  width: 25px;
+  border: none;
+  top: 20px;
+  left: 10%;
+  position: absolute;
+  outline: none;
+  /*  z-index: 1;*/
+}
+
+#back:hover {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 500px) {
+  #back {
+    left: 10px;
+    top: 10px;
+  }
 }
 
 #copied_popup {
@@ -110,62 +133,64 @@ body {
   display: flex;
   justify-content: center;
   align-self: center;
-  background-position: 10px 12px; /* Position the search icon */
-  background-repeat: no-repeat; /* Do not repeat the icon image */
-  width: 600px; /* Full-width */
-  font-size: 16px; /* Increase font-size */
-  padding: 12px 20px 12px 40px; /* Add some padding */
-  border: 1px solid #ddd; /* Add a grey border */
-  margin: 50px 0px; /* Add some space below the input */
+  background-position: 10px 12px;
+  /* Position the search icon */
+  background-repeat: no-repeat;
+  /* Do not repeat the icon image */
+  width: 600px;
+  /* Full-width */
+  font-size: 16px;
+  /* Increase font-size */
+  padding: 12px 20px 12px 40px;
+  /* Add some padding */
+  border: 1px solid #ddd;
+  /* Add a grey border */
+  margin: 50px 0px;
+  /* Add some space below the input */
 }
 
-#myInput:focus{
+#myInput:focus {
   outline: 3px ridge #1a4059;
-  border:none;
+  border: none;
 }
-
 
 @media only screen and (max-width: 800px) {
-    #myInput {
-      width: 400px;
-    }
+  #myInput {
+    width: 400px;
+  }
 }
 
 @media only screen and (max-width: 500px) {
-    #myInput {
-      width: 375px;
-    }
+  #myInput {
+    width: 375px;
+  }
 }
 
-
-
-.highlight{ 
-  background:#00FF00; 
-  padding:1px; 
-  border:#00CC00 dotted 1px; 
+.highlight {
+  background: #00FF00;
+  padding: 1px;
+  border: #00CC00 dotted 1px;
 }
 
-.mobile_table td{
+.mobile_table td {
   white-space: nowrap;
-  font-size:13px;
+  font-size: 13px;
 }
 
 @media only screen and (min-width: 800px) {
-  .mobile_table{
+  .mobile_table {
     display: none;
   }
-
-  .desktop_table{
+  .desktop_table {
     display: flex;
   }
 }
 
 @media only screen and (max-width: 800px) {
-  .mobile_table{
+  .mobile_table {
     display: flex;
   }
-
-  .desktop_table{
+  .desktop_table {
     display: none;
   }
 }
