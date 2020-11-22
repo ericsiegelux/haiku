@@ -41,7 +41,13 @@
                 // And then remove the default "a" tag styling
                 haiku_link.style.text_decoration = "none"
                 haiku_link.style.color = "inherit"
-                haiku_link.innerHTML = data.feed.entry[i-2].gs$cell.inputValue + "<br>"+ data.feed.entry[i-1].gs$cell.inputValue + "<br>"+ data.feed.entry[i].gs$cell.inputValue; // Make cell.
+
+                //Starts with the whole data array of haikus, slices to get haiku (3 lines), 
+                //returns haiku lines w/ line breaks in between
+                haiku_link.innerHTML = data.feed.entry
+                   .slice(haiku_iterator-2, haiku_iterator+1)
+                   .map(element => element.gs$cell.inputValue)
+                   .join('<br>')
 
                 // return the td object
                 return haiku
