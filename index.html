@@ -14,18 +14,28 @@
       </style>
       <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
       <script>
+         function get_haiku_index(data) {
+           index = Math.floor(Math.random()*(data.feed.entry.length/3));
+           index = index*3 - 1
+           return index
+         }
+         function emplace_haiku(data, i) {
+           if ( i == null) {
+             i = get_haiku_index(data);
+           }
+           document.getElementById("line1").innerHTML = data.feed.entry[i-2].gs$cell.inputValue;
+           document.getElementById("line2").innerHTML = data.feed.entry[i-1].gs$cell.inputValue;
+           document.getElementById("line3").innerHTML = data.feed.entry[i].gs$cell.inputValue;
+         }
          var urlParams = new URLSearchParams(window.location.search);
-         var haiku_index = urlParams.get('haiku_id') - 2
+         var haiku_index = urlParams.get('haiku_index')
                     
          var haikuJSON = "https://spreadsheets.google.com/feeds/cells/1Asx6pUR-b2g5zNzPLRa1JX0YfbILB5bCse0L8nIP15U/1/public/full?alt=json";
          $.getJSON(haikuJSON, function( data ) {
                var items = [];
                var sheet_rows = data.feed.entry.length/3;
 
-               document.getElementById("line1").innerHTML = data.feed.entry[haiku_index].gs$cell.inputValue;
-               document.getElementById("line2").innerHTML = data.feed.entry[haiku_index+1].gs$cell.inputValue;
-               document.getElementById("line3").innerHTML = data.feed.entry[haiku_index+2].gs$cell.inputValue;
-         
+               emplace_haiku(data, haiku_index)
                // makeDesktopTable(data, sheet_rows);
                makeMobileTable(data, sheet_rows)
          
@@ -149,16 +159,18 @@
           $.getJSON(haikuJSON, function( data ) {
                     var urlParams = new URLSearchParams(window.location.search);
                     
-                    var prev_haiku_index = urlParams.get('haiku_id')
-                    var haiku_index = Math.floor(Math.random()*(data.feed.entry.length/3))*3;
-         
-                    while(prev_haiku_index == haiku_index){
-                      haiku_index = Math.floor(Math.random()*(data.feed.entry.length/3))*3;
-                    }
-         
-                    // Take me to a new URL
-                    var new_link = document.location.origin + document.location.pathname + "?haiku_id=" + haiku_index
-                    document.location = new_link
+                    var prev_haiku_index = urlParams.get('haiku_index')
+                    var haiku_index;
+
+                    do {
+                      haiku_index = get_haiku_index(data);
+                    } while(prev_haiku_index == haiku_index)
+
+                    // Take me to a new haiku
+                    emplace_haiku(data, haiku_index);
+                    // And update the URL
+                    var query_parameter = "?haiku_index=" + haiku_index
+                    window.history.pushState(null, document.title, query_parameter);
           })
          })
          
