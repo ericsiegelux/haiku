@@ -62,7 +62,7 @@
                     var urlParams = new URLSearchParams(window.location.search);
                     
                     var prev_haiku_index = urlParams.get('haiku_index')
-                    var haiku_index;
+                    // var haiku_index = urlParams.get('haiku_index');
 
                     do {
                       haiku_index = get_haiku_index(data);
@@ -71,7 +71,7 @@
                     // Take me to a new haiku
                     emplace_haiku(data, haiku_index);
                     // And update the URL
-                    var query_parameter = "haiku/?haiku_index=" + haiku_index
+                    var query_parameter = "?haiku_index=" + haiku_index //haiku/?haiku_index=
                     window.history.pushState(null, document.title, query_parameter);
           })
          })
