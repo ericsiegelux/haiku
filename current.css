@@ -129,6 +129,20 @@ body {
   top: 1px;
 }
 
+#search{
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: -1;
+}
+
+#haiku_grid{
+  display:grid;
+  width:60%;
+  text-align: center;
+  align-self: center;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
 #myInput {
   display: flex;
   justify-content: center;
@@ -137,11 +151,11 @@ body {
   /* Position the search icon */
   background-repeat: no-repeat;
   /* Do not repeat the icon image */
-  width: 600px;
+  width: 100%;
   /* Full-width */
   font-size: 16px;
   /* Increase font-size */
-  padding: 12px 20px 12px 40px;
+  padding: 1% 5%;
   /* Add some padding */
   border: 1px solid #ddd;
   /* Add a grey border */
@@ -154,17 +168,6 @@ body {
   border: none;
 }
 
-@media only screen and (max-width: 800px) {
-  #myInput {
-    width: 400px;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  #myInput {
-    width: 375px;
-  }
-}
 
 .highlight {
   background: #00FF00;
@@ -172,25 +175,32 @@ body {
   border: #00CC00 dotted 1px;
 }
 
-.mobile_table td {
-  white-space: nowrap;
-  font-size: 13px;
+
+.indiv_haiku{
+  min-width: 20ch;
+  width : 100%;
+  height : 100%;
+  display: block;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #F4F9F6;
+  border-radius: 6px;
+  transition: filter 0.5s;
 }
 
-@media only screen and (min-width: 800px) {
-  .mobile_table {
-    display: none;
-  }
-  .desktop_table {
-    display: flex;
-  }
+.indiv_haiku:hover{
+    filter: brightness(95%);
 }
 
-@media only screen and (max-width: 800px) {
-  .mobile_table {
-    display: flex;
-  }
-  .desktop_table {
-    display: none;
-  }
+.indiv_haiku a{
+    color: inherit;
+    transition: color 0.5s;
 }
+
+.indiv_haiku:hover a{
+  text-decoration: none;
+  color:#155780;
+}
+
+
+

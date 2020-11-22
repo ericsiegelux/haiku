@@ -20,27 +20,20 @@
                var sheet_rows = data.feed.entry.length/3;
          
                makeDesktopTable(data, sheet_rows);
-               makeMobileTable(data, sheet_rows);
-         
          
          })
 
-         function create_haiku_td(data, i) {
-                var haiku = document.createElement("td");
-                // Remove the margin so the padding takes it up instead
+         function create_haiku_div(data, haiku_iterator) {
+                var haiku = document.createElement("div");
+
+                haiku.className = "indiv_haiku";
 
                 // Create a clickable object to be put inside the td
                 var haiku_link = document.createElement("a");
+                haiku_link.className = "haiku_link";
                 haiku.appendChild(haiku_link)
                 // Where does the click take you
-                haiku_link.href = "/index.html?haiku_index=" + i
-                // Style the clickable object so it fills up the WHOLE td element
-                haiku_link.style.width = "100%"
-                haiku_link.style.height = "100%"
-                haiku_link.style.display = "block"
-                // And then remove the default "a" tag styling
-                haiku_link.style.text_decoration = "none"
-                haiku_link.style.color = "inherit"
+                haiku_link.href = "/index.html?haiku_index=" + haiku_iterator
 
                 //Starts with the whole data array of haikus, slices to get haiku (3 lines), 
                 //returns haiku lines w/ line breaks in between
@@ -55,97 +48,32 @@
 
          function makeDesktopTable(data, sheet_rows) {
             
-            var ELTable  = document.createElement("table");
-            ELTable.className = 'desktop_table table justify-content-center text-center w-100';
-            var Height = sheet_rows;
-            const Width  = 3;
-            var rows = parseInt(Height, 10);
-            var cols = parseInt(Width, 10); 
-         
-            ELTable.innerHTML = ""; // Empty table before inserting new stuff
-         
-            var tbody = document.createElement("tbody");
-            
-            haiku_iterator = data.feed.entry.length-1;
+            var haiku_grid  = document.getElementById("haiku_grid");
           
-            for (var i = 0; i < rows; i++) {           // N rows...
-              var R = document.createElement("tr");    // Make row.
-              for (var j = 0; j < cols; j++) {         // N cells...
-                var haiku = create_haiku_td(data, haiku_iterator)
-         
-                  haiku_iterator = haiku_iterator-3;
-         
-                  if (haiku_iterator === -1) { break; }
-         
-                  R.appendChild(haiku);                      // Insert cell into row.
-              }
-              if (haiku_iterator === -1) { break; }
-              tbody.appendChild(R);                    // Insert row into tbody
+            for (let i = data.feed.entry.length-1; i > 0; i-=3) { console.log(i);      
+              var d = create_haiku_div(data,i);  
+              haiku_grid.appendChild(d);
+
             }
-         
-         
-            table_holder = document.getElementsByClassName("table-lg");
-            table_holder = table_holder[0];
-         
-            ELTable.appendChild(tbody);    
-            table_holder.appendChild(ELTable);            // Insert tbody into table
-          }
-         
-          function makeMobileTable(data, sheet_rows) {
-            
-            var ELTable  = document.createElement("table");
-            ELTable.className = 'mobile_table table justify-content-center text-center w-100';
-            var Height = sheet_rows;
-            const Width  = 2;
-            var rows = parseInt(Height, 10);
-            var cols = parseInt(Width, 10); 
-         
-            ELTable.innerHTML = ""; // Empty table before inserting new stuff
-         
-            var tbody = document.createElement("tbody");
-            
-            haiku_iterator = data.feed.entry.length-1;
-          
-            for (var i = 0; i < rows; i++) {           // N rows...
-              var R = document.createElement("tr");    // Make row.
-              for (var j = 0; j < cols; j++) {         // N cells...
-                var haiku = document.createElement("td");
-         
-                  haiku.innerText = data.feed.entry[haiku_iterator-2].gs$cell.inputValue + "\n"+
-                  data.feed.entry[haiku_iterator-1].gs$cell.inputValue + "\n"+ data.feed.entry[haiku_iterator].gs$cell.inputValue; // Make cell.
-         
-         
-                  haiku_iterator = haiku_iterator-3;
-         
-                  if (haiku_iterator === -1) { break; }
-         
-         
-                  R.appendChild(haiku);                      // Insert cell into row.
-              }
-              if (haiku_iterator === -1) { break; }
-              tbody.appendChild(R);                    // Insert row into tbody
-            }
-         
-         
-            table_holder = document.getElementsByClassName("table-lg");
-            table_holder = table_holder[0];
-         
-            ELTable.appendChild(tbody);    
-            table_holder.appendChild(ELTable);            // Insert tbody into table
+        
           }
          
          
       </script>
    </head>
    <body>
-      <button id="back" onclick="location.href='index.html'" ></button>
-      <input type="text" id="myInput"  placeholder="Search for a haiku phrase">
-      <div class="table-lg"></div>
+      
+      <div id="haiku_grid">
+        <div id="search">
+          <button id="back" onclick="location.href='index.html'" ></button>
+          <input type="text" id="myInput"  placeholder="Search for a haiku phrase">
+        </div>
+      </div>
       <script>
          $(document).ready(function(){
             $("#myInput").on("keyup", function() {
               var value = $(this).val().toLowerCase();
-              $(".table tr td").filter(function() {
+              $(".indiv_haiku").filter(function() {
          
                 //original_value = value;
          
