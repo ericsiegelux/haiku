@@ -25,6 +25,27 @@
 
          })
 
+         function create_haiku_td(data, i) {
+                var haiku = document.createElement("td");
+                // Remove the margin so the padding takes it up instead
+
+                // Create a clickable object to be put inside the td
+                var haiku_link = document.createElement("a");
+                haiku.appendChild(haiku_link)
+                // Where does the click take you
+                haiku_link.href = "/index.html?haiku_id=" + i
+                // Style the clickable object so it fills up the WHOLE td element
+                haiku_link.style.width = "100%"
+                haiku_link.style.height = "100%"
+                haiku_link.style.display = "block"
+                // And then remove the default "a" tag styling
+                haiku_link.style.text_decoration = "none"
+                haiku_link.style.color = "inherit"
+                haiku_link.innerHTML = data.feed.entry[i-2].gs$cell.inputValue + "<br>"+ data.feed.entry[i-1].gs$cell.inputValue + "<br>"+ data.feed.entry[i].gs$cell.inputValue; // Make cell.
+
+                // return the td object
+                return haiku
+         }
 
          function makeDesktopTable(data, sheet_rows) {
 
@@ -44,11 +65,7 @@
             for (var i = 0; i < rows; i++) {           // N rows...
               var R = document.createElement("tr");    // Make row.
               for (var j = 0; j < cols; j++) {         // N cells...
-                var haiku = document.createElement("td");
-
-                  haiku.innerText = data.feed.entry[haiku_iterator-2].gs$cell.inputValue + "\n"+
-                  data.feed.entry[haiku_iterator-1].gs$cell.inputValue + "\n"+ data.feed.entry[haiku_iterator].gs$cell.inputValue; // Make cell.
-
+                var haiku = create_haiku_td(data, haiku_iterator)
 
                   haiku_iterator = haiku_iterator-3;
 
