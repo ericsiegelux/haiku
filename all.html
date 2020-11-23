@@ -3,17 +3,22 @@
    <head>
       <!-- Required meta tags -->
       <meta charset="utf-8">
+      <meta property="og:title" content="Riq's Haikus" />
+      <meta property="og:image:secure" content="logo.png" />
+      <meta property="og:url" content="http://siegelux.com" />
+      <link rel="shortcut icon" href="tab_icon.png" type="image/png">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link rel="stylesheet" href="current.css">
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
       <script src="https://spreadsheets.google.com/feeds/cells/1Asx6pUR-b2g5zNzPLRa1JX0YfbILB5bCse0L8nIP15U/1/public/values?alt=json-in-script&callback=doData"></script>
-      <title>Riq's Haikus</title>
+      <title>All of Riq's Haikus</title>
       <style type="text/css">
          body { background: #F4F9F6 !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
       </style>
       <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
       <script>
+
          var haikuJSON = "https://spreadsheets.google.com/feeds/cells/1Asx6pUR-b2g5zNzPLRa1JX0YfbILB5bCse0L8nIP15U/1/public/full?alt=json";
          $.getJSON(haikuJSON, function( data ) {
                var items = [];
