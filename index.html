@@ -72,7 +72,7 @@
                     emplace_haiku(data, haiku_index);
                     // And update the URL
                     var query_parameter = "?haiku_index=" + haiku_index //haiku/?haiku_index=
-                    window.history.pushState(null, document.title, query_parameter);
+                    window.history.replaceState(null, document.title, query_parameter);
           })
          })
          
